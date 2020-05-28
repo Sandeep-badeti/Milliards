@@ -1,0 +1,23 @@
+<div class="loginBg">
+  <form action="" [formGroup]="loginForm" class="loginFormHeight">
+    <div class="loginDiv">
+      <div class="loginForm">
+        <div class="loginLogo"><img src="../assets/images/loginLogo.png" width="214" height="57" alt="" /></div>
+        <div class="errorElert" *ngIf="message != ''">
+          {{message}}
+        </div>
+        <div class="inpudtDiv mb-5 clearfix">
+          <i class="user fs24 userNameIcon"></i>
+          <input class="inputField loginInput" (click)="clearError()" type="text" formControlName="userName"
+            name="userName" placeholder="Username" required>
+        </div>
+        <div class="inpudtDiv mb-5 clearfix">
+          <i class="locked fs24 userNameIcon"></i>
+          <input class="inputField loginInput" (click)="clearError()" type="password" formControlName="password"
+            name="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="loginBtn" (click)="login()">Login</button>
+      </div>
+    </div>
+  </form>
+</div>

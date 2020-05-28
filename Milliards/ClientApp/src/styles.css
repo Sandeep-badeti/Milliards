@@ -1,0 +1,619 @@
+@import url("./assets/fonts.css");
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+/********** Start Here Default CSS **********/
+
+HTML, BODY 										{ border:0; margin:0; padding:0; font:100%/100.1% 'Montserrat', sans-serif!important; 
+                                                  background:#f7f7f7}
+body                                            { padding-top:52px;}
+H1, H2, H3, H4, H5, H6, DIV, FORM, P, UL, OL    { margin:0; padding:0; font-weight:normal;}
+p 												{ font:500 13px 'Montserrat', sans-serif; color:#333; margin:0 0 12px 0!important;}
+th, td											{ vertical-align: middle!important;}
+img 											{ border:0;}
+li 												{ list-style-type:none;}
+a 												{ color:#3f51b5; text-decoration:none; outline:0 none; cursor:pointer;}
+a:hover 										{ text-decoration:none!important; color:#000}
+button:focus, a:focus							{ outline:none;}
+input 											{ outline:none; border:none}
+.clear                                          { clear:both;}
+.fs7                                            { font-size:7px!important;}
+.fs8 											{ font-size:8px!important;}
+.fs9 											{ font-size:9px!important;}
+.fs10 											{ font-size:10px!important;}
+.fs11 											{ font-size:11px!important;}
+.fs12 											{ font-size:12px!important;}
+.fs13 											{ font-size:13px!important;}
+.fs14 											{ font-size:14px!important;}
+.fs15 											{ font-size:15px!important;}
+.fs16 											{ font-size:16px!important;}
+.fs18 											{ font-size:18px!important;}
+.fs20 											{ font-size:20px!important;}
+.fs22 											{ font-size:22px!important;}
+.fs24 											{ font-size:24px!important;}
+.fs26 											{ font-size:26px!important;}
+.fs28 											{ font-size:28px!important;}
+.fs30 											{ font-size:30px!important;}
+.fs32 											{ font-size:32px!important;}
+.fs40 											{ font-size:40px!important;}
+.fs80 											{ font-size:80px!important;}
+.fw												{ font-weight:bold!important;}
+.fw400											{ font-weight:400!important;}
+.fw500											{ font-weight:500!important;}
+.fw600											{ font-weight:600!important;}
+.tdu											{ text-decoration:underline!important;}
+.mauto 											{ margin:0 auto;}
+.br0                	                        { border:none!important;}
+.brr0											{ border-radius:0!important;}
+.bColor                                         { color:#000!important;}
+.mainColor                                      { color:#3f51b5!important;}
+.rColor                                         { color:#cd242b!important;}
+.grColor, ::placeholder                         { color:#ccc;}
+.successColor                                   { color:#09b601;}
+button:disabled, button[disabled]               { background:#eee!important; color:#999!important; cursor:default;}
+.innerTabs a.disabled                           { pointer-events:none; cursor:default; background:#eee!important; color:#999!important;}
+
+/********** End Here Default CSS **********/
+
+
+
+/********** Start Here Common CSS **********/
+.logo {  margin-left: 20px;}
+.topNav {
+  background: #00709e;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  height: 55px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2
+}
+.float-left .fs24                                { font-size: 18px !important;}
+.headerRight                                     {  float: right;  padding: 10px 25px 10px 0;}
+.headerRight span                               { display:block; margin:0 0 1px 0; color:#fff;}
+.logoutIcon                                     { float:left; margin:7px 0 0 15px}
+.mainNav                                        { padding:0; font-size:13px; position:relative; height:100%; margin-left:50px; 
+                                                    z-index:2;}
+.mainNav a                                      { background:#0379aa; color:#FFF; padding:7px 15px; font-weight:500; display:inline-block; float:left; margin:0px 1px; min-width:100px;
+                                                  text-align:center; font-size:15px;}
+.mainNav a span                                 { display:block; margin:6px 0 0 0}
+.mainNav a.active                               { color:#00709e; background-color:#f3f6f9; }
+
+.mainContent                                    { width:100%; padding:0;}
+.mainDiv                                        { margin:15px 30px;}
+.mainDivBg                                      { background:#fff; padding:15px 30px 30px; display:block; border-radius:4px; margin:0; width:100%}
+.brDiv                                          { background:#fafafa; width:100%; border-bottom:1px solid #ebebeb; padding:14px 25px; 
+                                                  position:relative; top:15px; z-index:1;}
+.brDiv a                                        { font-size:18px; color:#00709e; font-weight:500;}
+.mainHeading									                  { font-size:18px; color:#00709e; padding:15px 15px 15px 0; font-weight:600;}
+.mainHeading span 								              { color:#333; font-size:14px; padding-right:0; font-weight:500;}
+.table 											                    { background:#fff; color:#444; border-radius:10px; overflow:hidden; 
+                                                  width:100%!important; border:none!important;}
+.table th 										                  { color:#fff; background:#00709e; padding:15px!important; font-weight:500!important; 
+                                                  font-size:12px!important; border:none!important;}
+.table td 							                        { padding:8px!important; border-top:none!important; font-size:12px; vertical-align: text-top; color:#333;}
+.table-striped tbody tr:nth-of-type(odd) 		    { background:#f3f6f9;}
+.table td a                 					          { color:#00709e!important; font-weight:500;text-decoration:underline;}
+.table td a:hover								                { color:#000!important;} 
+.table .innerTable                              { border:2px solid #e1e1e1; width:97.5%; border-radius:6px; margin:0 15px;}                         
+.table .innerTable table                        { width:100%;}
+.table .innerTable table th                     { background:transparent; color:#00709e; font-weight:600!important; padding:15px!important}
+.table .innerTable table td                     { border-top:1px solid #e1e1e1!important}
+.table .innerTable table tr:nth-of-type(odd)	  { background:transparent;}
+.searchDiv                                      { background:#fff; box-shadow:0px 0px 6px rgba(0, 0, 0, 0.2); border-radius:4px; width:100%; 
+												  overflow:hidden; border:1px solid #00709e;}
+.searchDiv img                                  { float:left; width:19px; margin:15px}
+.searchDiv .searchBox                           { float:left; margin:0; padding:16px 0 17px; width:90%; font-size:13px; }
+.searchDiv .searchBtn                           { float:left; border:none; border-left:1px solid #00709e; padding:16px 20px 17px; font-size:14px;  
+                                                  text-align:center; border-radius:0 4px 4px 0; background:transparent; color:#00709e; 
+                                                  font-weight:600; } 
+.searchDiv .searchBtn:hover                     { background:#00709e; color:#fff;}
+.filterDiv                                      { background:#fff; box-shadow:0px 0px 6px rgba(0, 0, 0, 0.2); border-radius:4px; width:100%; 
+												  overflow:hidden; padding:16px 20px 17px; border:1px solid #00709e;}
+.filterShowHide                                 { color:#00709e; font-size:14px; font-weight:500;}
+.filterDiv img                                  { float:right; margin:7px 0 0 0;}
+.filterShowDiv                                  { background:#fff; box-shadow:0px 0px 6px rgba(0, 0, 0, 0.2); border-radius:4px; width:100%; 
+												  overflow:hidden; border:1px solid #00709e; padding:30px 15px;}
+.filterShowDiv label                            { font-size:14px;}
+.searchBtnSec                                   { border:1px solid #00709e; padding:8px 10px; background:#00709e; color:#FFF; font-size:14px; 
+                                                  font-weight:500; border-radius: 24px; margin:23px 0 0 0; width:100%}
+.searchBtnSec:hover                             { background:#055c80; color:#fff;}
+
+.viewTable                                      { border:2px solid #e1e1e1; width:97.5%; border-radius:6px; margin:0 15px;}
+.viewTable .table                               { width:100%;}
+.viewTable .table th                            { background:transparent; color:#00709e; font-weight:600!important; padding:15px!important}
+.viewTable .table td                            { border-top:1px solid #e1e1e1!important}
+.viewTable .table tr:nth-of-type(odd)	          { background:transparent;}
+table.dataTable thead th.nosorting              { background-image:none!important;}
+.productname                                    { width:240px; overflow:hidden; text-overflow:ellipsis;}
+
+.actionDiv a                                    { margin:0;display: inline-flex !important;  padding: 4px 6px;}
+.actionDiv a .eye                               { position:relative; font-size:16px !important;}
+.actionDiv a .file                               {  position: relative; font-size: 15px !important;} 
+.actionDiv a .clone                             { position:relative; top:4px;} 
+.tableList .dataTables_length, 
+.tableList .dataTables_info                     { display:none}
+.tableList .dataTables_filter                   { float:left!important; visibility:hidden; width:100%; text-align:left!important; margin-top:-10px}
+.tableList .dataTables_filter label             { display:block; margin-bottom:15px}
+.tableList .dataTables_filter input             { border-radius:4px; border:1px solid #ccc; box-shadow:inset 0px 2px 5px rgba(0,0,0,.1); 
+                                                  padding:9px 15px 9px 50px; font-size:13px; display:block; visibility:visible; margin:0!important; width:100%; background:url("assets/images/searchIcon.png") no-repeat 12px 14px;}
+.tableList .dataTables_paginate                 { font-size:13px; margin-top:10px;}
+.tableList .dataTables_wrapper 
+.dataTables_paginate .paginate_button.current   { background:#3f51b5; border:none!important; color:#fff!important;}
+.tableList .dataTables_wrapper 
+.dataTables_paginate span .paginate_button      { background:#fff; border:none; color:#999!important; height:25px; width:25px; padding:0;  
+                                                  border-radius:50%!important; line-height:25px; margin:0 5px}
+.tableList .dataTables_wrapper 
+.dataTables_paginate span .paginate_button:hover{ background:#c5cae9; color:#3f51b5!important;}
+
+.tableList .dataTables_paginate 
+.paginate_button.next, .tableList 
+.dataTables_paginate .paginate_button.last,
+.tableList .dataTables_paginate 
+.paginate_button.first, .tableList 
+.dataTables_paginate .paginate_button.previous  { border:none!important; border-radius:100px!important;}
+
+.tableList .dataTables_paginate 
+.paginate_button.next:hover, .tableList 
+.dataTables_paginate .paginate_button.last:hover,
+.tableList .dataTables_paginate 
+.paginate_button.first:hover, 
+.tableList .dataTables_paginate 
+.paginate_button.previous:hover                 { background:#c5cae9; color:#3f51b5!important; border:none; }
+.tableList .dataTables_wrapper 
+.dataTables_paginate .paginate_button.disabled  { color:#ccc!important}
+.dataTables_empty                               { display:none;}
+table.dataTable thead .sorting_asc              { background-image:url("assets/images/sort_asc.png")!important;}
+table.dataTable thead .sorting_desc             { background-image:url("assets/images/sort_desc.png")!important;}
+table.dataTable thead .sorting                  { background-image:url("assets/images/sort_both.png")!important;}
+.allBtn                                         { padding:7px 15px; border-radius:3px; box-shadow:2px 2px 3px rgba(0,0,0,.2); margin:0 5px;                                                           cursor:pointer; border:none; color:#fff!important; font-size:13px; font-weight:500}
+.allBtn:hover                                   { background:#333; color:#fff;}
+.primaryBtn                                     { background:#09b601;}
+.primaryBtn .fa, .secondaryBtn .fa			        { margin-right:6px;}
+.secondaryBtn                                   { background:#cd242b;}
+.innerTabs                                      { margin:30px 0 -5px 0; padding:0;}
+.innerTabs a                                    { background:#3f51b5; color:#fff!important; border-radius:4px; padding:8px 15px 6px; 
+                                                  margin:0 8px 3px 0; font-weight:600; float:left; font-size:13px;}
+.innerTabs a span                               { position:relative; top:-1px;}
+.innerTabs a.active                             { color:#3f51b5!important; background-color:#fff; border-radius:4px 4px 0 0; margin-bottom:0;
+                                                  padding-bottom:15px;}
+.subHeading										                  { border-bottom:1px solid #ccc; padding:0 0 6px 15px; margin:20px 0px 25px; width:100%; 
+                                                  position:relative;}
+.subHeading	h4									                { font-size:16px; color:#cd242b; font-weight:600;}
+.subHeading h4 span								              { background:#293f6f; width:17%; display:inline-block; height:3px; position:absolute; bottom:-2px;
+                                                  left:10px; border-radius:4px;}
+.listcheckmark 									                { position:relative; padding-left:8px!important; cursor:pointer; user-select:none; top:0px;}
+.listcheckmark span								              { margin-left:20px!important; font-size:13px; font-weight:500; color:#263239;}
+.listcheckmark input 							              { position:absolute; opacity:0; cursor:pointer;}
+.listcheckmark .checkmark 						          { position:absolute; top:0; height:18px; width:18px; background:#fff; border:1px solid #999; 
+												  box-shadow:inset 0px 0px 3px rgba(0, 0, 0, 0.3), 0px 1px 0px rgba(255, 255, 255, 0.2); 
+                                                  margin-left:0!important; border-radius:4px; left:0;}
+.listcheckmark:hover input ~ .checkmark 		    { background-color:#fff;}
+.listcheckmark .checkmark:after 				        { content:""; position:absolute; display:none;}
+.listcheckmark input:checked ~ .checkmark:after { display:block;}
+.listcheckmark .checkmark:after 				        { left:5px; top:2px; width:6px; height:9px; border:solid #666; border-width:0 2px 2px 0; 
+                                                  transform:rotate(45deg);}
+.viewDetails label	                            { color:#717171; font-size:13px; font-weight:400; float:left; width:50%; 
+                                                  padding:0; margin:0}
+.viewDetails p		                              { font-size:13px; font-weight:600; float:left; width:50%; word-break:break-all; margin:0!important}
+.dateField                                      { display:block!important}
+.dateField .mat-form-field-wrapper              { padding:0!important}
+.dateField .mat-form-field-flex                 { align-items:end!important;}
+.dateField .mat-form-field-infix                { padding:0!important; margin-top: -10px!important;}
+.dateField .mat-form-field-underline            { background:transparent!important; bottom:-5px!important;}
+.dateField .mat-form-field-label                { display:none!important}
+.dateField .mat-button-wrapper                  { visibility:hidden!important;}
+.dateField .mat-form-field-suffix               { z-index:9; top:2px; right:-2px;}
+.ellipseTD                                      { white-space:nowrap; max-width:150px; overflow:hidden; text-overflow:ellipsis;}
+.ellipseHeading                                 { white-space:nowrap; max-width:180px; overflow:hidden; text-overflow:ellipsis;}
+.mat-input-element                              { font:13px 'Montserrat' !important;}
+.mat-form-field                                 { font-family:'Montserrat' !important;}
+
+/********** End Here Common CSS **********/
+
+
+
+/********** Start Here Login CSS **********/
+
+.loginBg                                        { background:url("assets/images/loginBg.png") no-repeat top center; background-size:cover; 
+                                                  position:fixed; top:-55px; left:0px; height:768px;}
+.loginFormHeight                                { height:768px; vertical-align:middle; overflow:hidden; display:table-cell; width:100vw;}
+.loginDiv                                       { margin:0 auto; padding:30px 90px 60px; width:500px; background:#fff; border-radius:10px; 
+                                                  box-shadow:0px 0px 10px rgba(0,112,158,.5);}
+.loginForm                                      { width:100%; margin:0 auto;}
+.loginForm .loginLogo                           { text-align:center; margin:0 0 60px 0; }
+.userNameIcon                                   { font-weight:500; color:#ccc; padding:2px 10px 2px 0; margin:0 0 0 5px; float:left;}
+.loginBtn                                       { background:#00709e; box-shadow:2px 2px 5px rgba(0,0,0,.5); color:#fff; font-size:18px;
+                                                  border-radius:100px; padding:17px 50px; display:block; letter-spacing:0.5px; border:none; 
+                                                  margin:0 auto; text-transform:uppercase;font-weight:600;}
+.loginBtn:hover                                 { background:#000}
+.inpudtDiv 									                    { width:100%; position:relative; border:1px solid #d3d4d6; margin-bottom:1.5rem;
+                                                  box-shadow:inset 0px 2px 5px rgba(0,0,0,.1); border-radius:4px; height:34px; padding:.3rem 10px;}
+.loginDiv .inpudtDiv                            { height:50px; border-radius:6px; padding:10px 10px;}
+.inpudtDiv label						                    { color:#263239; font:500 13px 'Montserrat'; margin-bottom:3px;}
+span.mandatory									                { color:#ff0000!important; position:relative; top:-2px; font-size:16px!important; 
+                                                  margin-left:5px!important}
+.inputField 									                  { display:block; width:100%; background:transparent; color:#000; font:13px 'Montserrat';}
+.loginInput                                     { float:left; width:86%; margin-top:6px;}
+.errorBg::before                                { background:#cd242b!important;}
+.inpudtDiv .errorMs                             { color:#ff0000; font-size:10px; position:absolute; bottom:-20px; font-weight:600;}
+
+.chosenSelect 									                { border:none; height:35px;}
+.chosenSelect:focus 							              { outline:none;}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active                   { transition:background-color 5000s ease-in-out 0s;}
+.errorElert                                     { color:#cd242b; font-size:13px; position:absolute; top:13%;}
+.selectDiv select                               { text-indent:1px; text-overflow:''; -webkit-appearance:none; appearance:none; padding:2px; 
+                                                  border:none; background:transparent url("assets/images/downArrow.png") no-repeat right center;}
+.lookupIcon						                { padding:0; position:absolute; top:9px; right:6px;}
+
+/********** End Here Login CSS **********/
+
+
+
+/********** Start Here Popup CSS **********/
+
+.popupDiv                                      { margin:0; padding:0; background: rgba(0, 0, 0, 0.5)}
+.popupDiv .modal-footer                        { border:none;}
+.popupDiv .modal-content                       { border:none; box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2); padding:10px;}
+
+
+/********** End Here Popup CSS **********/
+.close-btn                                      {background-color: #555;  border-radius: 24px;  padding:10px 20px; color:#FFF; border:none; font-size: 14px;}
+ .close-btn:hover                               {background-color:#444343; }
+ .mat-closeIcon                                 {vertical-align: middle;}
+.add_btn                                        {margin-top: 10px; margin-bottom:10px;}
+.primaryBtn                                     {background: #00709e;  border-radius: 24px;  padding: 15px 20px;  font-size: 16px;}
+.tableList .dataTables_wrapper .dataTables_paginate .paginate_button.current {  background: #99c5d8;  border: none !important;  color: #000 !important;}
+.no-data-available                              {text-align:  center;background:#f3f6f9;}
+.text-length                                    {white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100px;}
+.tooltipclass                                   {position: relative;left:0;}
+.add_btn                                        {}
+.primaryBtn                                     {background: #00709e; border-radius: 24px; padding: 10px 20px; font-size: 14px;}
+.primaryBtn:hover                               {background: #055c80;}
+.tableList .dataTables_wrapper .dataTables_paginate .paginate_button.current { background: #99c5d8; border: none !important;color: #000 !important;}
+
+/********** Add Product CSS **********/
+.box {
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+  .box .tittle {
+    font-size: 18px;
+    color: #00709e;
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+.clearfix {
+  overflow: auto;
+  clear: both;
+}
+
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+.cell_1, .cell_2, .cell_3, .cell_4, .cell_5, .cell_6, .cell_7, .cell_8, .cell_9, .cell_10 {
+  padding: 0px 15px;  float: left;}
+
+.cell_1 {  width: 10%;
+}
+
+.cell_2 {
+  width: 24.999%;
+}
+
+.cell_3 {
+  width: 33.333%;
+}
+
+.cell_4 {
+  width: 40%;
+}
+
+.cell_5 {
+  width: 50%;
+}
+
+.cell_6 {
+  width: 60%;
+}
+
+.cell_7 {
+  width: 66.666%;
+}
+
+.cell_8 {
+  width: 40%;
+}
+
+.cell_9 {
+  width: 90%;
+}
+
+.cell_10 {
+  width: 40%;
+}
+
+.star {
+  color: #cd242b;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  padding: 10px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.checkbox {
+  margin: 10px;
+}
+
+.labletext {
+  min-width: 150px;
+  margin-right: 15px;
+  display: inline-block;
+  font-size: 14px;
+}
+
+textarea {
+  margin: 0;
+  font: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-family: inherit;
+  color: inherit;
+}
+
+input::-webkit-input-placeholder {
+  color: #DDD !important;
+}
+
+textarea::-webkit-input-placeholder {
+  color: #DDD !important;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+  color: #DDD !important;
+}
+
+input::-moz-placeholder { /* Firefox 19+ */
+  color: #DDD !important;
+}
+
+input:-ms-input-placeholder {
+  color: #DDD !important;
+}
+
+.icon {
+  padding: 10px;
+  display: inline-block;
+  font-size: 26px;
+  font-weight: bold;
+  margin: 10px;
+  border-radius:5px;
+}
+.minus_icon {
+  height: 5px;
+  width: 16px;
+  background-color: #FFF;
+  border:2px solid #FFF;
+  display: block;
+  margin: 13px 6px;
+}
+.icon_1 {
+  padding: 6px;
+  color: #FFF;
+  background-color: #00709e;
+}
+
+.td_icon_2 {
+  color: #FFF;
+  background-color: #00709e;
+  font-size: 16px;
+  padding: 8px 20px;
+  margin: 2px 3px; border-radius:4px;
+}
+.td_icon_2:hover {background-color:#055c80; color:#FFF;  }
+.table .td_icon_2 a {
+  color: #FFF !important;
+}
+  .checkbox input[type=checkbox], input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+    margin-left: 20px;
+    width: 16px;
+    height: 16px;
+  }
+
+.control-label {
+  font-weight: 600;
+}
+
+option:first-of-type {
+
+}
+
+
+
+/**********  Add Product End CSS **********/
+.text-right {
+  text-align: right
+}
+
+.btn-grp {
+  margin: 10px;
+  margin-right: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: #555;
+  border: none;
+  color: white;
+  padding: 14px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 26px;
+}
+
+  .btn:hover {
+    background-color: #000;
+    color: #FFF;
+  }
+.td_icon { display:inline-block;}
+.actionDiv {width:84px;}
+.table-form { width:100%;}
+  .table-form td {min-width:100px;  }
+  .table-form .form-control {min-width:100px; max-width:200px;  }
+  .table-form tr:hover { background-color:#e1e1e1; cursor:pointer; }
+.close_icon .close_img {
+    display:inline-block; margin-right:10px;
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0.5);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.tableList .dataTables_filter input {
+  border-radius: 6px;  border: 1px solid #ccc;
+  padding: 16px 15px 16px 50px;
+  font-size: 13px;
+  width: 100%;
+  background-color: #FFF;
+}
+
+.view-edit-div{
+    right: 35px;
+    position: absolute;
+    padding: 10px;
+}
+.view_sec { padding:10px 0px;
+}
+.viewDetails .primaryBtn {
+  display: block;
+}
+.primaryBtn .edit { margin-right:5px; display:inline-block;}
+.viewDetails .form-group {margin-bottom:15px; padding:10px}
+.box-container .checkbox { margin-top: 37px;}
+.viewDetails label.lab_name {
+  width: 40% !important;
+}
+.viewDetails .form-group {
+  margin-bottom: 20px;
+  padding: 10px 5px;
+  display: block;
+  clear: both;
+}
+.viewDetails .p-text {
+  font: 500 13px 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  word-break: break-all;
+  margin: 0 !important;
+}
+.custom-invalid-feedback {  color: #ff0000; font-size: 13px; font-weight: 500; margin-top: 5px; display: block;}
+.errorMs {  color: #ff0000; font-size: 13px; font-weight: 500; margin-top: 5px; display: block;}
+.box-container .table td { vertical-align:text-top !important; font-size:14px;}
+.row .row .col-md-9 {
+  padding-left: 0px !important;
+}
+.lable-text {
+  padding: 12px 10px;
+  display: block;
+  font-weight: 500;
+  color: #00709e;
+  float: left;
+}
+.larg_input {
+  width: 180px;
+  color: #00709e;
+ margin-right: 10px;
+}
+.actionDiv a {text-decoration:none !important;}
+.actionDiv a:hover {  text-decoration: none;}
+
+.actionDiv [data-title] {
+  outline: none; /*optional styling*/
+  font-size: 30px; /*optional styling*/
+  position: relative;
+  cursor: pointer;
+}
+
+  .actionDiv [data-title]:hover::before {
+    content: attr(data-title);
+    position: absolute;
+    bottom: -26px;
+    right: 0;
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 2px;
+    background: #046289;
+    color: #fff;
+    font-size: 12px;
+    font-family: sans-serif;
+    white-space: nowrap;
+  }
+
+  .actionDiv [data-title]:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 8px;
+    display: inline-block;
+    color: #fff;
+    border: 8px solid transparent;
+    border-bottom: 8px solid #046289;
+  }
+
+.mat-dialog-container .modal-header { position:relative; padding:0px; margin:0px; border-bottom:none;}
+.mat-dialog-title {border-bottom: 1px solid #e1e1e1; width:100%;}
+.mat-dialog-container .modal-footer {width:100%}
+.close-icon {position: absolute;color: #333; padding: 0px;font-size: 24px;right: -6px; top: -7px;}
+.fo-details {border:1px solid #c7c4c4; }
+.btn-pacakage {margin-top: 24px;}
+.p-data{
+  font: 500 13px 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  word-break: break-all;
+}
+.pallet-main-div {margin: 2px 2px;}
+.pallet-div {border:1px solid #c7c4c4; padding: 6px;}
+mat-button-focus-overlay, .mat-button-ripple.mat-ripple {
+  top: -4px;
+  left: 0;
+  right: -5px;
+  bottom: 0;
+  position: absolute;
+  pointer-events: none;
+  border-radius: inherit;
+}
+.mat-form-field-prefix .mat-icon-button, .mat-form-field-suffix .mat-icon-button {
+  height: 1.5em;
+  width: 1.5em;
+  top:-3px; right:-3px;
+}

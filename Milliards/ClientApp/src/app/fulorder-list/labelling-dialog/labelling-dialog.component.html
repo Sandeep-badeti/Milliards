@@ -1,0 +1,131 @@
+<div class="modal-header">
+    <!-- <div class="close-icon"><a mat-dialog-close><i class="closeIcon"></i></a></div> -->
+    <h2 mat-dialog-title>{{'labellingPage.title' | translate}}</h2>
+</div>
+<mat-dialog-content>
+    <div class="mainDiv">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="labletext">{{'labellingPage.upcLabel' | translate}}<span class="star">*</span>
+                    </label>
+                    <input type="text" class="form-control" name="upc" (keyup.enter)="onUpcEnter($event)"
+                        [(ngModel)]="upc" />
+                    <small class="errorMs" *ngIf="!fulfilmentDetails.status && labellingError">{{labellingError}}</small>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="fulfilmentDetails?.data">
+                <div class="form-group">
+                    <label class="labletext">{{'labellingPage.trackingNum' | translate}}<span class="star">*</span>
+                    </label>
+                    <input class="form-control" type="text" name="upc" readonly [(ngModel)]="trackingNumber" />
+                </div>
+            </div>
+            <div class="col-4" *ngIf="fulfilmentDetails.status">
+                <div class="btn-pacakage">
+                    <div class="form-group">
+                        <button class="allBtn primaryBtn" (click)="createPackage()"
+                            tabindex="1">{{'labellingPage.createPackage' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="fo-details" *ngIf="fulfilmentDetails.status">
+            <div class="mainDiv">
+                <h4 class="mainHeading">{{'labellingPage.fulfilmentDetails.title' | translate}}</h4>
+                <div class="clearfix"></div>
+                <div class="view_sec">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span class="labletext">{{'labellingPage.fulfilmentDetails.fulOrderId' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <span class="p-data">{{fulfilmentDetails.data.fulOrderId}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span class="labletext">{{'labellingPage.fulfilmentDetails.productPic' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-group" *ngIf="fulfilmentDetails.data?.productPic">
+                                <img [src]="'data:image/jpg;base64,'+fulfilmentDetails.data?.productPic" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span class="labletext">{{'labellingPage.fulfilmentDetails.fulOrderStatus' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <span class="p-data">{{fulfilmentDetails.data.fulOrderStatus}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span class="labletext">{{'labellingPage.fulfilmentDetails.productName' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <span class="p-data">{{fulfilmentDetails.data.productName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span class="labletext">{{'labellingPage.fulfilmentDetails.maninSku' | translate}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <span class="p-data">{{fulfilmentDetails.data.sku}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="text-right modal-footer">
+        <button *ngIf="fulfilmentDetails.data" class="allBtn primaryBtn" (click)="foDetails()"
+            tabindex="1">{{'labellingPage.btnFoDetails' | translate}}</button>
+        <button class="close-btn" (click)="closeDialog()" tabindex="-1">{{'btnClose' | translate}}</button>
+    </div>
+</mat-dialog-actions>
+<div class="modal popupDiv" id="packageConfornation" style="display: block; padding-left: 17px;" *ngIf="showDialog"
+    role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <p class="fs15 fw500">{{message}}</p>
+            </div>
+            <div class="modal-footer float-right">
+                <button type="button" class="allBtn primaryBtn" (click)="closeMsgDialog()">
+                    {{'ok' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="modal-header">
+    <div class="close-icon"><a mat-dialog-close><i class="closeIcon"></i></a></div>
+    <h2 mat-dialog-title>{{'assignPage.title' | translate}}</h2>
+
+</div>
+<form [formGroup]="assignForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+        <div class="box-container">
+            <div class="clearfix">
+                <div class="cell_3">
+                    <div class="form-group">
+                        <label class="labletext">{{'assignPage.warehouse' | translate}}<span class="star">*</span> </label>
+                        <select class="form-control" required formControlName="warehouseId" [(ngModel)]="selectedWarehouse">
+                            <option [ngValue]="undefined">{{'assignPage.select' | translate}}</option>
+                            <option *ngFor="let obj of wareouseList" [ngValue]="obj.warehouseId">{{obj.name}}</option>
+                        </select>
+                    <span class="inputFocus"></span>
+                     <small class="errorMs" *ngIf="submitted && !f.warehouseId.value && f.warehouseId.errors.required">{{'assignPage.selectWareHouse' | translate}}</small>
+                    </div>
+                </div>
+                <div class="cell_3">
+                    <div class="form-group">
+                        <label class="labletext">{{'assignPage.carrier' | translate}}<span class="star">*</span> </label>
+                        <select class="form-control" required formControlName="carrierId" (change)="getCarrierServiceList()" [(ngModel)]="selectedCarrier">
+                            <option [ngValue]="undefined">{{'assignPage.select' | translate}}</option>
+                            <option *ngFor="let obj of carrierList" [ngValue]="obj.carrierId">{{obj.name}}</option>
+                        </select>
+                        <span class="inputFocus"></span>
+                     <small class="errorMs" *ngIf="submitted && !f.carrierId.value && f.carrierId.errors.required">{{'assignPage.selectCarrier' | translate}}</small>
+                    </div>
+                </div>
+                <div class="cell_3">
+                    <div class="form-group">
+                        <label class="labletext">{{'assignPage.carrierService' | translate}}<span class="star">*</span> </label>
+                        <select class="form-control" required formControlName="carrierServiceId" [(ngModel)]="selectedCarrierService">
+                            <option [ngValue]="undefined">{{'assignPage.select' | translate}}</option>
+                            <option *ngFor="let obj of carrierServiceList" [ngValue]="obj.carrierServiceId">{{obj.name}}
+                            </option>
+                        </select>
+                        <span class="inputFocus"></span>
+                     <small class="errorMs" *ngIf="submitted && !f.carrierServiceId.value && f.carrierServiceId.errors.required">{{'assignPage.selectCarrierService' | translate}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="text-right modal-footer">
+            <button class="allBtn primaryBtn" type="submit" (click)="assgin()" tabindex="1">{{'assignPage.btnApply' | translate}}</button>
+            <button class="close-btn" mat-dialog-close tabindex="-1">{{'assignPage.btnCancel' | translate}}</button>
+        </div>
+    </mat-dialog-actions>
+</form>

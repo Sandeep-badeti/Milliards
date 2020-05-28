@@ -1,0 +1,64 @@
+<!-- <div class="brDiv">
+  <a [routerLink]="['/products/list']" [routerLinkActiveOptions]="{exact: true}"
+    routerLinkActive="active">{{'productListPage.title' | translate}}</a>
+</div> -->
+<div class="mainDiv">
+  <h3 class="mainHeading">{{'productListPage.title' | translate}} : <span>{{'totalRecs' | translate}}
+      {{totalRecords}}</span></h3>
+  <div class="table-responsive tableList">
+    <table datatable [dtOptions]="dtOptions" class="table table-striped table-sm" id="productId">
+      <thead>
+        <tr>
+          <th>{{'productListPage.table.productName' | translate}}</th>
+          <th>{{'productListPage.table.sku' | translate}}</th>
+          <th>{{'productListPage.table.upc' | translate}}</th>
+          <th>{{'productListPage.table.description' | translate}}</th>
+          <th>{{'productListPage.table.status' | translate}}</th>
+          <th>{{'productListPage.table.noOfVersions' | translate}}</th>
+          <th>{{'productListPage.table.inventory' | translate}}</th>
+          <th>{{'productListPage.table.category' | translate}}</th>
+          <th>{{'productListPage.table.shipsAlone' | translate}}</th>
+          <th>{{'productListPage.table.manufacturer' | translate}}</th>
+          <th class="nosorting">{{'productListPage.table.action' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="productList?.length != 0">
+        <tr *ngFor="let list of productList">
+          <td class="text-length">
+            <span matTooltip="{{list.productName}}" [matTooltipPosition]="'above'">
+              {{list.productName}}
+            </span>
+          </td>
+          <td>{{list.sku}}</td>
+          <td>{{list.upc}}</td>
+          <td class="text-length">
+            <span matTooltip="{{list.description}}" [matTooltipPosition]="'left'">
+              {{list.description}}
+            </span>
+          </td>
+          <td>{{list.status}}</td>
+          <td>{{list.noofVersion}}</td>
+          <td>{{list.inventory}}</td>
+          <td>{{list.category}}</td>
+          <td><img *ngIf="list.shipAlone" src='assets/images/rightMark.png' /> <img *ngIf="!list.shipAlone"
+              src='assets/images/checkBox.png' /></td>
+          <td>{{list.manufacturer}}</td>
+          <td class="nosorting">
+            <div class="actionDiv">
+              <span class="td_icon"><a (click)="viewProduct(list)"><i class='eye fs14 fw600'></i></a></span>
+              <span class="td_icon"><a (click)="editProduct(list)"><i class='edit fs14 fw600'></i></a></span>
+              <span class="td_icon"><a (click)="cloneProduct(list)"><i class='file fs14 fw600'></i></a></span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tbody *ngIf="productList?.length == 0">
+        <tr>
+          <td colspan="11" class="no-data-available">{{'noData' | translate}}</td>
+        </tr>
+      <tbody>
+    </table>
+  </div>
+  <div class="float-right add_btn"><button (click)="addProduct()" class="allBtn primaryBtn"><i class="fa plus"></i>
+      {{'productListPage.btnAddProduct' | translate}}</button></div>
+</div>

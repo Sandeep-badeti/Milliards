@@ -1,0 +1,244 @@
+<div class="brDiv">
+  <a [routerLink]="['/products/list']" [routerLinkActiveOptions]="{exact: false}"
+      [routerLinkActive]="['active']">{{'products' | translate}}</a> >
+  <span>{{'productDetails' | translate}}</span>
+</div>
+
+<div class="mainDiv">
+<div class="mainDivBg viewDetails">
+  <div class="view-edit-div float-right">
+    <div class="allBtn primaryBtn"><a (click)="editProduct()"><i class='edit fs14 fw600'></i> {{'edit' | translate}}</a></div>
+  </div>
+  <div class="float-left">
+    <h4 class="mainHeading mt-3">{{'productViewPage.basicInfo.title' | translate}}</h4>
+  </div>
+  <div class="clearfix"></div>
+  <div class="view_sec">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>{{'productViewPage.basicInfo.name' | translate}}</label>
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="form-group">
+              <span class="p-text">{{productDetails.name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-3">
+          <div class="form-group">
+            <span class="labletext">{{'productViewPage.basicInfo.description' | translate}} </span>
+          </div>
+          </div>
+          <div class="col-md-9">
+            <div class="form-group">
+              <span class="p-text">{{productDetails.description}}</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+      <div class="clearfix"></div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>{{'productViewPage.basicInfo.mainSku' | translate}}</label>
+          <p>{{productDetails.mainSKU}}</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>{{'productViewPage.basicInfo.upc' | translate}}</label>
+          <p>{{productDetails.upc}}</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>{{'productViewPage.basicInfo.box' | translate}}</label>
+          <p>{{productDetails.boxName}}</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>{{'productViewPage.basicInfo.status' | translate}}</label>
+          <p>{{productDetails.statusName}}</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>{{'productViewPage.basicInfo.height' | translate}} </label>
+          <p>{{productDetails.height}}</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>{{'productViewPage.basicInfo.weightUnit' | translate}}</label>
+          <p>{{productDetails.weight}}</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>{{'productViewPage.basicInfo.length' | translate}}</label>
+          <p>{{productDetails.length}}</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>{{'productViewPage.basicInfo.weight' | translate}} </label>
+          <p>{{productDetails.weight}}</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>{{'productViewPage.basicInfo.shipsAlone' | translate}} </label>
+          <p>
+            <img *ngIf="productDetails.shipsAlone_FLG" src='assets/images/rightMark.png' /> <img *ngIf="!productDetails.shipsAlone_FLG" src='assets/images/tickmark.png' />
+          </p>
+        </div>
+      </div>
+      <!-- <div class="col-md-3">
+        <div class="form-group">
+          <label>{{'productViewPage.basicInfo.title' | translate}}Box : </label>
+          <p>{{productDetails.boxName}}</p>
+        </div>
+      </div> -->
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>{{'productViewPage.basicInfo.width' | translate}} </label>
+          <p>{{productDetails.width}}</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>{{'productViewPage.basicInfo.dimensionUnit' | translate}}</label>
+          <p>{{productDetails.dimensionName}}</p>
+        </div>
+      </div>
+    </div>
+      <h4 class="mainHeading mt-3">{{'productViewPage.virtualSkus.title' | translate}}</h4>
+      <div class="row" *ngFor="let sku of productDetails.productSku;">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>{{'productViewPage.virtualSkus.sku' | translate}}</label>
+            <p>{{sku.sku}}</p>
+          </div>
+          </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>{{'productViewPage.virtualSkus.status' | translate}}</label>
+            <p>{{sku.statusName}}</p>
+            </div>
+          </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-3"><span class="labletext">{{'productViewPage.virtualSkus.description' | translate}}</span></div>
+              <div class="col-md-8"><span class="p-text">{{sku?.description}}</span></div>
+            </div>
+            </div>
+          </div>
+        </div>
+      <div *ngIf="productDetails?.productVersion?.length>1">
+      <h4 class="mainHeading mt-4">{{'productViewPage.versions.title' | translate}}<span></span></h4>
+      <div class="row" *ngFor="let version of productDetails.productVersion;let i = index">
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>{{'productViewPage.versions.version' | translate}}</label>
+            <p>{{i+1}}</p>
+          </div>
+          </div>
+        <div class="col-md-9">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-3"><span class="labletext">{{'productViewPage.versions.description' | translate}}</span></div>
+              <div class="col-md-9"><span class="p-text">{{version?.description}}</span></div>
+            </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <h4 class="mainHeading mt-4">{{'productViewPage.inventory.title' | translate}}</h4>
+      <div class="row" *ngFor="let Inventory of productDetails.productInventory;">
+        <div class="col-md-3" *ngIf="productDetails?.productVersion?.length > 1">
+          <div class="form-group">
+            <label>{{'productViewPage.inventory.version' | translate}}</label>
+            <p>{{Inventory.productVersionId}}</p>
+          </div>
+          </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>{{'productViewPage.inventory.warehouse' | translate}}</label>
+            <p>{{Inventory.warehouseName}}</p>
+          </div>
+          </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label>{{'productViewPage.inventory.quantity' | translate}}</label>
+            <p>{{Inventory.quantity}}</p>
+          </div>
+          </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label> {{'productViewPage.inventory.status' | translate}}</label>
+            <p>{{Inventory.statusName}}</p>
+          </div>
+          </div>
+        </div>
+      <h4 class="mainHeading mt-4"> {{'productViewPage.additionalInfo.title' | translate}}</h4>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>{{'productViewPage.additionalInfo.tags' | translate}}</label>
+            <p>{{tags}}</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>{{'productViewPage.additionalInfo.category' | translate}}</label>
+            <p>{{productDetails?.categoryName}}</p>
+          </div>
+          </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>{{'productViewPage.additionalInfo.color' | translate}}</label>
+            <p>{{productDetails?.colorName}}</p>
+          </div>
+          </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>{{'productViewPage.additionalInfo.manufacturer' | translate}}</label>
+            <p>{{productDetails?.manufacturerName}}</p>
+          </div>
+          </div>
+       
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>{{'productViewPage.additionalInfo.ref1' | translate}}</label>
+            <p>{{productDetails?.ref1}}</p>
+          </div>
+          </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>{{'productViewPage.additionalInfo.condition' | translate}}</label>
+            <p>{{productDetails.conditionName}}</p>
+          </div>
+          </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>{{'productViewPage.additionalInfo.ref2' | translate}}</label>
+            <p>{{productDetails?.ref2}}</p>
+          </div>
+          </div>
+        </div>
+      </div>
+  <div class="clearfix"></div>
+</div>
+</div>

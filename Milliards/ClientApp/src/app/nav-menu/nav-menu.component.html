@@ -1,0 +1,27 @@
+<header class="topNav" [hidden]="!showMenu">
+  <div class="float-left">
+    <a class="logo">
+      <img src="assets/images/logo.png" width="135" height="55" alt="logo">
+    </a>
+  </div>
+  <div class="mainNav float-left">
+    <div [ngClass]="{ show: isExpanded }">
+      <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" [routerLink]="['/products']"
+        (click)="redirect('/products/list')"> <i class="clipboard fs24"></i> <span>{{'navBar.products' | translate}}</span> </a>
+      <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" [routerLink]="['/orders']"
+        (click)="redirect('/orders/list')"> <i class="clipboards fs24"></i> <span>{{'navBar.orders'  | translate}}</span> </a>
+      <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" [routerLink]="['/fulorders']"
+        (click)="redirect('/fulorders/list')"> <i class="clipboards fs24"></i> <span>{{'navBar.fulorders'  | translate}}</span> </a>
+    </div>
+  </div>
+  <div class="headerRight">
+    <p class="text-right mb-0 float-left">
+      <span><a (click)="logout()">{{'navBar.signOut' | translate}}</a></span>
+      <span>{{user.firstName}}</span>
+    </p>
+    <a (click)="logout()" class="logoutIcon">
+      <img src="assets/images/logoutIcon.png" width="24" height="24" alt="logout">
+    </a>
+  </div>
+
+</header>

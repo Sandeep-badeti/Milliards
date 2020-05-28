@@ -1,0 +1,141 @@
+<div class="brDiv">
+    <a [routerLink]="['/fulorders/list']" [routerLinkActiveOptions]="{exact: false}"
+        [routerLinkActive]="['active']">{{'fulOrders' | translate}}</a> > <span>{{'fulOrderDetails' | translate}}</span>
+</div>
+<div class="mainDiv" *ngIf="fulOrderDetails">
+    <div class="mainDivBg viewDetails">
+        <h4 class="mainHeading mt-3">{{'viewFulOrderPage.title' | translate}}</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.fulOrderId' | translate}}</label>
+                    <p>{{fulOrderDetails.fulOrderId}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.cancelReason' | translate}}</label>
+                    <p>{{fulOrderDetails.cancelReason}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.carrierUpdateDate' | translate}}</label>
+                    <p>{{fulOrderDetails.carrierUpdateDate  | date:'MM/dd/yyyy'}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.pickingBatchId' | translate}}</label>
+                    <p>{{fulOrderDetails?.pickingBatchId}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.originalFulOrderId' | translate}}</label>
+                    <p>{{fulOrderDetails.originalFulOrderId}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.errorFlag' | translate}}</label>
+                    <p>{{fulOrderDetails.errorFlag}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.carrierDescription' | translate}}</label>
+                    <p>{{fulOrderDetails?.carrierDescription}}</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.orderId' | translate}}</label>
+                    <p>{{fulOrderDetails?.orderId}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.assignedWareHouse' | translate}}</label>
+                    <p>{{fulOrderDetails.assignedWareHouse}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.box' | translate}}</label>
+                    <p>{{fulOrderDetails?.box}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.labelBatchId' | translate}}</label>
+                    <p>{{fulOrderDetails.labelBatchId}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.onHoldFlag' | translate}}</label>
+                    <p>{{fulOrderDetails?.onHoldFlag}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.errorReason' | translate}}</label>
+                    <p>{{fulOrderDetails?.errorReason}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.shipByDate' | translate}}</label>
+                    <p>{{fulOrderDetails?.shipByDate  | date:'MM/dd/yyyy'}}</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.fulOrderStatus' | translate}}</label>
+                    <p>{{fulOrderDetails.fulOrderStatus}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.assignedCarrier' | translate}}</label>
+                    <p>{{fulOrderDetails?.assignedCarrier}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.assignedCarrierService' | translate}}</label>
+                    <p>{{fulOrderDetails?.assignedCarrierService}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.palletName' | translate}}</label>
+                    <p>{{fulOrderDetails?.palletName}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.onHoldReason' | translate}}</label>
+                    <p>{{fulOrderDetails?.onHoldReason}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.isPrime' | translate}}</label>
+                    <p>{{fulOrderDetails?.isPrime}}</p>
+                </div>
+                <div class="mb-4 clearfix">
+                    <label>{{'viewFulOrderPage.assignmentDate' | translate}}</label>
+                    <p>{{fulOrderDetails?.assignmentDate  | date:'MM/dd/yyyy'}}</p>
+                </div>
+            </div>
+        </div>
+        <h4 class="mainHeading mt-3">{{'viewFulOrderPage.fullItemDetails.title' | translate}}</h4>
+        <div *ngFor="let item of fulOrderDetails.fullItemDetails">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-4 clearfix">
+                        <label>{{'viewFulOrderPage.fullItemDetails.fulItemId' | translate}}</label>
+                        <p>{{item.fulItemId}}</p>
+                    </div>
+                    <div class="mb-4 clearfix">
+                        <label>{{'viewFulOrderPage.fullItemDetails.productId' | translate}}</label>
+                        <p>{{item.productId}}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-4 clearfix">
+                        <label>{{'viewFulOrderPage.fullItemDetails.orderLineId' | translate}}</label>
+                        <p>{{item.orderLineId}}</p>
+                    </div>
+                    <div class="mb-4 clearfix">
+                        <label>{{'viewFulOrderPage.fullItemDetails.quantity' | translate}}</label>
+                        <p>{{item.quantity}}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-4 clearfix">
+                        <label>{{'viewFulOrderPage.fullItemDetails.sku' | translate}}</label>
+                        <p>{{item.sku}}</p>
+                    </div>
+                    <div class="mb-4 clearfix">
+                        <label>{{'viewFulOrderPage.fullItemDetails.productVersion' | translate}}</label>
+                        <p>{{item.productVersion}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="float-right mt-4 mb-4">
+        <button class="close-btn" (click)="closeFulOrderDetails()"><span class="close_icon">
+                {{'btnClose' | translate}}</span></button>
+    </div>
+</div>

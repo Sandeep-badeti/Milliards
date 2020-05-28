@@ -1,0 +1,125 @@
+@font-face {
+  font-family: 'pcs';
+  src:  url('fonts/pcs.eot?uuy48f');
+  src:  url('fonts/pcs.eot?uuy48f#iefix') format('embedded-opentype'),
+    url('fonts/pcs.ttf?uuy48f') format('truetype'),
+    url('fonts/pcs.woff?uuy48f') format('woff'),
+    url('fonts/pcs.svg?uuy48f#pcs') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+i {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'pcs' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.calendar:before {
+  content: "\e915";
+}
+.edit-1:before {
+  content: "\e916";
+}
+.finger:before {
+  content: "\e917";
+}
+.help-round-button:before {
+  content: "\e918";
+}
+.save-file:before {
+  content: "\e919";
+}
+.add-user:before {
+  content: "\e900";
+}
+.checked:before {
+  content: "\e901";
+}
+.checklist:before {
+  content: "\e902";
+}
+.check-mark:before {
+  content: "\e903";
+}
+.clipboard:before {
+  content: "\e904";
+}
+.clipboards:before {
+  content: "\e905";
+}
+.closeIcon:before {
+  content: "\e906";
+}
+.delete:before {
+  content: "\e907";
+}
+.edit:before {
+  content: "\e908";
+}
+.eye:before {
+  content: "\e909";
+}
+.file:before {
+  content: "\e90a";
+}
+.help:before {
+  content: "\e90b";
+}
+.home:before {
+  content: "\e90c";
+}
+.home-1:before {
+  content: "\e90d";
+}
+.house:before {
+  content: "\e90e";
+}
+.locked:before {
+  content: "\e90f";
+}
+.logout:before {
+  content: "\e910";
+}
+.miscellaneous:before {
+  content: "\e911";
+}
+.plus:before {
+  content: "\e912";
+}
+.search:before {
+  content: "\e913";
+}
+.user:before {
+  content: "\e914";
+}
+.building:before {
+  content: "\e91a";
+}
+.settings:before {
+  content: "\e91b";
+}
+.setting:before {
+  content: "\e91c";
+}
+.school:before {
+  content: "\e91d";
+}
+.mortarboard:before {
+  content: "\e91e";
+}
+.setup:before {
+  content: "\e91f";
+}
+.repair:before {
+  content: "\e920";
+}

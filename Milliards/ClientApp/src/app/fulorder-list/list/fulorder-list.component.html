@@ -1,0 +1,125 @@
+<!-- <div class="brDiv">
+    <a [routerLink]="['/fulorders/list']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+        {{'fullOrderListPage.title' | translate}}</a>
+</div> -->
+<div class="mainDiv">
+    <div class="clearfix">
+        <div class="float-left">
+            <h3 class="mainHeading">{{'fullOrderListPage.title' | translate}} :
+                <span>{{'totalRecs' | translate}}
+                    {{totalRecords}}</span>
+            </h3>
+        </div>
+        <div class="float-right">
+            <div class="clearfix">
+                <div class="form-group  float-left">
+                    <span class="lable-text">{{'fullOrderListPage.mode' | translate}}</span>
+                    <select class="form-control larg_input" [(ngModel)]="selectedMode" (change)="onModeChange()">
+                        <option *ngFor="let obj of types?.modeList" [ngValue]="obj.modeName">{{obj.modeName}}</option>
+                    </select>
+                </div>
+                <div class="form-group  float-left" *ngIf="isPickingMode">
+                    <span class="lable-text">{{'fullOrderListPage.table.warehouse' | translate}}</span>
+                    <select class="form-control larg_input" placeholder="Warehouse" (change)="onWarehouseChange()"
+                        [(ngModel)]="selectedWarehouseId">
+                        <option [ngValue]="0">- Select Warehouse -</option>
+                        <option *ngFor="let obj of types?.warehouseList" [ngValue]="obj.warehouseId">{{obj.name}}
+                        </option>
+                    </select>
+                </div>
+
+            </div>
+        </div> <!-- <Right end -->
+    </div>
+    <div class="table-responsive tableList">
+        <table datatable [dtOptions]="dtOptions" id="fulOrderTable" [dtTrigger]="dtTrigger"
+            class="table table-striped table-sm dataTable no-footer">
+            <thead>
+                <tr class="sorting_asc">
+                    <th class="nosorting">
+                        <span *ngIf="isPickingMode">
+                            <input type="checkbox" [(ngModel)]="masterSelected" [checked]="masterSelected"
+                                name="allFulOrders" (change)="allFullOrders($event)" />
+                        </span>
+                    </th>
+                    <th>{{'fullOrderListPage.table.fullOrderId' | translate}}</th>
+                    <th>{{'fullOrderListPage.table.orderId' | translate}}</th>
+                    <th>{{'fullOrderListPage.table.warehouse' | translate}}</th>
+                    <th>{{'fullOrderListPage.table.carrier' | translate}}</th>
+                    <th>{{'fullOrderListPage.table.carrrierService' | translate}}</th>
+                    <th>{{'fullOrderListPage.table.fulOrderStatus' | translate}}</th>
+                    <th>{{'fullOrderListPage.table.pickingBatchId' | translate}}</th>
+                    <th>{{'fullOrderListPage.table.labelBatchId' | translate}}</th>
+                    <th>{{'fullOrderListPage.table.palletId' | translate}}</th>
+                    <th>{{'fullOrderListPage.table.noOfFulItems' | translate}}</th>
+                    <th>{{'fullOrderListPage.table.onHold' | translate}}</th>
+                    <th class="nosorting">{{'fullOrderListPage.table.action' | translate}}</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="fulOrderList?.length != 0">
+                <tr *ngFor="let list of fulOrderList; let i=index">
+                    <td>
+                        <span *ngIf="isPickingMode"><input type="checkbox" name="fullOrderId"
+                                (change)="isAllSelected(i)" [checked]="list?.selected" /></span>
+                    </td>
+                    <td> {{list.fullOrderId}}</td>
+                    <td>{{list.orderId }}</td>
+                    <td>{{list.warehouse}}</td>
+                    <td>{{list.carrier}}</td>
+                    <td>{{list.carrierservice}}</td>
+                    <td>{{list.fulorderstatus}}</td>
+                    <td>{{list.pickingbatchID}}</td>
+                    <td>{{list.labelbatchID}}</td>
+                    <td>{{list.palletID}}</td>
+                    <td>{{list.nooffulitems}}</td>
+                    <td><img *ngIf="list.onhold" src='assets/images/rightMark.png' />
+                        <img *ngIf="!list.onhold" src='assets/images/checkBox.png' /></td>
+                    <td>
+                        <div class="actionDiv">
+                            <span class="td_icon"><a data-title="View" (click)="viewFulOrder(list)"><i
+                                        class="eye fs14 fw600"></i></a></span>
+                            <!-- <span *ngIf="list.fulorderstatus =='Entered'" class="td_icon"> <a data-title="Edit"
+                                    href=""><i class="edit fs14 fw600"></i></a></span> -->
+                            <span *ngIf="selectedMode=='Assigning'" class="td_icon"><a data-title="Assign"
+                                    (click)="openAssignDialog(list)"><i class="file fs14 fw600"></i></a></span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="fulOrderList?.length == 0">
+                <tr>
+                    <td colspan="13" class="no-data-available">{{'noData' | translate}}</td>
+                </tr>
+            <tbody>
+        </table>
+    </div>
+    <div class="float-right" *ngIf="isPickingMode">
+        <button class="allBtn primaryBtn"
+            (click)="createPickList()">{{'fullOrderListPage.btnCreatePickList' | translate}}</button>
+    </div>
+</div>
+<div class="modal popupDiv" id="confornation" data-keyboard="false" data-backdrop="static" style="display: block; padding-left: 17px;" *ngIf="showPickConfirmation"
+    role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="float-left">
+                    <h5>{{'fullOrderListPage.pickConfirmation' | translate}}</h5>
+                </div>
+                <div class="float-right">
+                    <button type="button" class="close" (click)="closePickConfirmationDialog()">
+                        <i class="fa closeIcon"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body text-center">
+                <p class="fs15 fw500">{{message}}</p>
+            </div>
+            <div class="modal-footer float-right">
+                <button type="button" class="allBtn primaryBtn" (click)="closePickConfirmationDialog()">
+                    {{'ok' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

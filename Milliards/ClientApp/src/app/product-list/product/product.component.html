@@ -1,0 +1,478 @@
+<div class="brDiv">
+  <a>{{'product' | translate}}/{{type}} {{'product' | translate}}</a>
+</div>
+<div class="mainDiv">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="add-products">
+      <div class="box">
+        <div class="tittle">{{'productPage.basicInfo.title' | translate}}</div>
+        <div class="box-container">
+          <div class="clearfix">
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.basicInfo.name' | translate}}<span class="star">*</span></label>
+                <input type="text" formControlName="name" name="name" class="form-control"
+                       [(ngModel)]="prdoductInfo.name" required placeholder="Enter Name">
+                <span class="inputFocus"></span>
+                <small class="errorMs" *ngIf="submitted && !f.name.value && f.name.errors.required">
+                  {{'productPage.productName' | translate}}
+                </small>
+              </div>
+            </div>
+            <div class="cell_7">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.basicInfo.description' | translate}}<span class="star">*</span></label>
+                <textarea class="form-control" formControlName="description" name="description"
+                          [(ngModel)]="prdoductInfo.description" rows="2" placeholder="Description"></textarea>
+                <span class="inputFocus"></span>
+                <small class="errorMs" *ngIf="submitted && !f.description.value && f.description.errors.required">
+                  {{'productPage.description' | translate}}
+                </small>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.basicInfo.mainSku' | translate}}<span class="star">*</span></label>
+                <input type="text" class="form-control" formControlName="mainSku" name="mainSku" required
+                       [(ngModel)]="mainSku" placeholder="Main SKU " (focusout)="validateSKU($event, 9999)">
+                <span class="inputFocus"></span>
+                <small class="errorMs" *ngIf="submitted && !f.mainSku.value && f.mainSku.errors.required">
+                  {{'productPage.mainSku' | translate}}
+                </small>
+                <small class="errorMs" *ngIf="dupliateSkuExist[9999]"> {{'productPage.mainSkuExist' | translate}} </small>
+                <small class="errorMs" *ngIf="mainVirtualDuplicated[9999]">
+                  {{'productPage.mainSkuDuplicate' | translate}}
+                </small>
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.basicInfo.upc' | translate}}<span class="star">*</span></label>
+                <input type="text" class="form-control" formControlName="upc" name="upc" required
+                       (focusout)="validateUpc($event)" [(ngModel)]="prdoductInfo.upc" placeholder="UPC">
+                <span class="inputFocus"></span>
+                <small class="errorMs" *ngIf="submitted && !f.upc.value && f.upc.errors.required">
+                  {{'productPage.upc' | translate}}</small>
+                <small class="errorMs" *ngIf="upcExist">
+                  {{'productPage.upcExists' | translate}}</small>
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.basicInfo.box' | translate}}<span class="star">*</span></label>
+                <select class="form-control" formControlName="boxId" name="boxId" required
+                        [(ngModel)]="prdoductInfo.boxId">
+                  <option [ngValue]="undefined">- Select Box -</option>
+                  <option *ngFor="let obj of types.boxList" [ngValue]="obj.boxId">{{obj.name}}</option>
+                </select>
+                <span class="inputFocus"></span>
+                <small class="errorMs" *ngIf="submitted && !f.boxId?.value && f.boxId.errors?.required">
+                  {{'productPage.box' | translate}}
+                </small>
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.basicInfo.status' | translate}}<span class="star">*</span></label>
+                <select class="form-control" formControlName="statusId" name="statusId" required
+                        [(ngModel)]="prdoductInfo.statusId">
+                  <option [ngValue]="undefined">- Select Status -</option>
+                  <option *ngFor="let obj of types.productStatusList" [ngValue]="obj.productStatusId">
+                    {{obj.name}}
+                  </option>
+                </select>
+                <span class="inputFocus"></span>
+                <small class="errorMs" *ngIf="submitted && !f.statusId.value && f.statusId?.errors.required">
+                  {{'productPage.productStatus' | translate}}
+                </small>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.basicInfo.length' | translate}} <span class="star">*</span></label>
+                <input type="number" [min]=1 class="form-control" formControlName="length" name="length" required
+                       [(ngModel)]="prdoductInfo.length" placeholder="Length">
+                <span class="inputFocus"></span>
+                <small class="errorMs" *ngIf="submitted && !f.length?.value && f?.length?.errors?.required">
+                  {{'productPage.length' | translate}}
+                </small>
+                <small class="errorMs" *ngIf="submitted && !f.length?.value && f?.length?.errors?.min">
+                    {{'productPage.minLength' | translate}}
+                </small>
+
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.basicInfo.width' | translate}} <span class="star">*</span></label>
+                <input type="number" [min]=1 formControlName="width" class="form-control" name="width" required
+                       [(ngModel)]="prdoductInfo.width" placeholder="Width">
+                <span class="inputFocus"></span>
+                <small class="errorMs" *ngIf="submitted && !f.width?.value && f?.width?.errors?.required">
+                  {{'productPage.width' | translate}}
+                </small>
+                <small class="errorMs" *ngIf="submitted && !f.width?.value && f?.width?.errors?.min">
+                  {{'productPage.minWidth' | translate}} 
+                </small>
+
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.basicInfo.height' | translate}} <span class="star">*</span></label>
+                <input type="number" [min]=1 class="form-control" formControlName="height" name="height" required
+                       [(ngModel)]="prdoductInfo.height" placeholder="Height">
+                <span class="inputFocus"></span>
+                <small class="errorMs" *ngIf="submitted && !f.height?.value && f?.height?.errors?.required">
+                  {{'productPage.height' | translate}}
+                </small>
+                <small class="errorMs" *ngIf="submitted && !f.height?.value && f?.height?.errors?.min">
+                  {{'productPage.minHeight' | translate}} 
+                </small>
+
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.basicInfo.weight' | translate}}<span class="star">*</span></label>
+                <input type="number" [min]=1 class="form-control" formControlName="weight" name="weight" required
+                       [(ngModel)]="prdoductInfo.weight" placeholder="Weight">
+                <span class="inputFocus"></span>
+                <small class="errorMs" *ngIf="submitted && !f.weight?.value && f?.weight?.errors?.required">
+                  {{'productPage.weight' | translate}}  
+                </small>
+                <small class="errorMs" *ngIf="submitted && !f.weight?.value && f?.weight?.errors?.min">
+                  {{'productPage.minWeight' | translate}} 
+                </small>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.basicInfo.dimensionUnit' | translate}} <span class="star">*</span></label>
+                <select class="form-control" name="dimensionUnitId" formControlName="dimensionUnitId" required
+                        [(ngModel)]="prdoductInfo.dimensionUnitId">
+                  <option [ngValue]="undefined">- Select Dimension -</option>
+                  <option *ngFor="let obj of types.dimensionUnitList" [ngValue]="obj.dimensionUnitId">
+                    {{obj.name}}
+                  </option>
+                </select>
+                <span class="inputFocus"></span>
+                <small class="errorMs"
+                       *ngIf="submitted && !f.dimensionUnitId.value && f.dimensionUnitId.errors.required">
+                       {{'productPage.dimensionUnit' | translate}} 
+                </small>
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.basicInfo.weightUnit' | translate}} <span class="star">*</span></label>
+                <select class="form-control" name="weightUnitId" formControlName="weightUnitId" required
+                        [(ngModel)]="prdoductInfo.weightUnitId">
+                  <option [ngValue]="undefined">- Select Weight Unit-</option>
+                  <option *ngFor="let obj of types.weightUnitList" [ngValue]="obj.weightUnitId">
+                    {{obj.name}}
+                  </option>
+                </select>
+                <span class="inputFocus"></span>
+                <small class="errorMs"
+                       *ngIf="submitted && !f.weightUnitId.value && f.weightUnitId.errors.required">
+                       {{'productPage.weightUnit' | translate}} 
+                </small>
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <div class="checkbox">
+                  {{'productPage.basicInfo.shipsAlone' | translate}} <span class="star">*</span> <input type="checkbox" (change)="isShipsAlone($event)"
+                                                                   required formControlName="shipsaloneFlg" name="shipsaloneFlg" disabled="disabled"
+                                                                   [(ngModel)]="prdoductInfo.shipsAlone_FLG" [value]="prdoductInfo.shipsAlone_FLG">
+                  <span class="inputFocus"></span>
+                  <small class="errorMs"
+                         *ngIf="submitted && !f.shipsaloneFlg.value && f.shipsaloneFlg.errors.required">
+                         {{'productPage.shipsAlone' | translate}} 
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="tittle">{{'productPage.virtualSkus.title' | translate}} </div>
+        <div class="box-container" formArrayName="productSku">
+          <table class="table">
+            <tr *ngFor="let virtualSku of productSkuArray.controls; let i = index;" [formGroupName]="i">
+              <td>{{'productPage.virtualSkus.sku' | translate}} <span class="star">*</span></td>
+              <td>
+                <input type="text" formControlName="sku" (focusout)="validateSKU($event, i)" required class="form-control" name="sku" [(ngModel)]="prdoductInfo.productSku[i].sku"
+                  placeholder="Enter SKU">
+                <small *ngIf="submitted && virtualSku?.controls?.sku?.invalid"
+                  class="form-text custom-invalid-feedback">SKU is required</small>
+                <small class="errorMs" *ngIf="mainVirtualDuplicated[i]"> {{'productPage.mainSkuDuplicate' | translate}}</small>
+                <small class="errorMs" *ngIf="dupliateSkuExist[i]">  {{'productPage.mainSkuExist' | translate}}</small>
+              </td>
+              <td>{{'productPage.virtualSkus.status' | translate}}<span class="star">*</span></td>
+              <td>
+                <select class="form-control" formControlName="statusId" required 
+                  [(ngModel)]="prdoductInfo.productSku[i].statusId">
+                  <option [ngValue]="undefined">- Select SKU Status -</option>
+                  <option *ngFor="let obj of types.productSKUStatusList" [ngValue]="obj.productSKUStatusId">{{obj.name}}
+                  </option>
+                </select>
+                <small *ngIf="submitted && virtualSku.controls.statusId.invalid"
+                  class="form-text custom-invalid-feedback">
+                  {{'productPage.skuStatus' | translate}}
+                 </small>
+              </td>
+              <td>{{'productPage.virtualSkus.description' | translate}}</td>
+              <td>
+                <textarea class="form-control" rows="1" formControlName="description"
+                  [(ngModel)]="prdoductInfo.productSku[i].description" placeholder="Description"></textarea>
+                <input type="hidden" formControlName="skuTypeId" [(ngModel)]="prdoductInfo.productSku[i].skuTypeId"
+                  value="1" />
+              </td>
+              <td> <span class="td_icon">
+                  <span class="td_icon_2" *ngIf='isNewSKURow(i)' (click)="addSKURow(i)"><a><i
+                        class='plus fw600'></i></a></span>
+                  <span class="td_icon_2" *ngIf='i!=0' (click)="deleteSKURow(i)"><a> <i
+                        class='delete fw600'></i></a></span>
+                </span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="box" *ngIf="prdoductInfo?.productVersion?.length > 1">
+        <div class="tittle">{{'productPage.versions.title' | translate}}</div>
+        <div class="box-container" formArrayName="productVersion">
+          <table class="table">
+            <tr *ngFor="let ver of productVersionArray.controls; let i = index;" [formGroupName]="i">
+              <td>{{'productPage.versions.version' | translate}}<span class="star">*</span></td>
+              <td>
+                <div class="form-group">
+                  <div class="control-label">{{prdoductInfo.productVersion[i].productVersionId}}</div>
+                </div>
+              </td>
+              <td>{{'productPage.versions.description' | translate}} </td>
+              <td>
+                <textarea class="form-control" rows="1" formControlName="description"
+                  [(ngModel)]="prdoductInfo.productVersion[i].description" placeholder="Description"></textarea>
+              </td>
+              <td> <span class="td_icon">
+                  <input type="hidden" formControlName="productVersionId"
+                    [(ngModel)]="prdoductInfo.productVersion[i].productVersionId" />
+                  <input type="hidden" formControlName="productId"
+                    [(ngModel)]="prdoductInfo.productVersion[i].productId" />
+                  <input type="hidden" formControlName="statusId"
+                    [(ngModel)]="prdoductInfo.productVersion[i].statusId" />
+                  <span class="td_icon_2" *ngIf='isNewVersionRow(i)' (click)="addVersionRow()"><a><i
+                        class='plus fw600'></i></a></span>
+                  <span class="td_icon_2" *ngIf='isNewVersionRow(i)' (click)="deleteVersionRow(i)"><a> <i
+                        class='delete fw600'></i></a></span>
+                </span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="btn-grp text-right" *ngIf="prdoductInfo?.productVersion?.length ==1">
+        <button (click)="addVersionRow()" class="allBtn primaryBtn"><i class="fa plus"></i> {{'productPage.btnAddVersion' | translate}}</button>
+      </div>
+      <div class="box">
+        <div class="tittle">{{'productPage.inventory.title' | translate}} </div>
+        <div class="box-container" formArrayName="productInventory">
+          <div class="clearfix" *ngFor="let inv of productInventoryArray.controls; let i = index;" [formGroupName]="i">
+            <div class="cell_2" *ngIf="prdoductInfo?.productVersion?.length > 1">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.inventory.version' | translate}} <span class="star">*</span></label>
+                <div class="control-label">{{i+1}}</div>
+              </div>
+              <input type="hidden" formControlName="productVersionId"
+                [(ngModel)]="prdoductInfo.productInventory[i].productVersionId">
+              <input type="hidden" formControlName="productInventoryId"
+                [(ngModel)]="prdoductInfo.productInventory[i].productInventoryId">
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.inventory.warehouse' | translate}}<span class="star">*</span></label>
+                <select class="form-control" placeholder="Warehouse" formControlName="warehouseId" required [ngClass]="{'form-control': true,
+                'is-invalid': inv?.controls?.warehouseId?.invalid && inv?.controls?.warehouseId?.touched}"
+                  [(ngModel)]="prdoductInfo.productInventory[i].warehouseId">
+                  <option [ngValue]="undefined">- Select Warehouse -</option>
+                  <option *ngFor="let obj of types.warehouseList" [ngValue]="obj.warehouseId">{{obj.name}}</option>
+                </select>
+                <small *ngIf="submitted && inv?.controls.warehouseId.invalid"
+                  class="form-text custom-invalid-feedback">
+                  {{'productPage.warehouse' | translate}}
+                </small>
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.inventory.quantity' | translate}} <span class="star">*</span></label>
+                <input type="number" [min]=1 [(ngModel)]="prdoductInfo.productInventory[i].quantity"
+                  formControlName="quantity" required [ngClass]="{'form-control': true,
+                'is-invalid': inv?.controls?.quantity?.invalid && inv?.controls?.quantity?.touched}"
+                  class="form-control" placeholder="Quantity ">
+                <small *ngIf="submitted && inv.controls.quantity.invalid"
+                  class="form-text custom-invalid-feedback">
+                  {{'productPage.quantity' | translate}}
+                </small>
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.inventory.status' | translate}}<span class="star">*</span></label>
+                <select class="form-control" placeholder="Status" formControlName="statusId" required [ngClass]="{'form-control': true,
+                'is-invalid': inv?.controls?.statusId?.invalid && inv?.controls?.statusId?.touched}"
+                  [(ngModel)]="prdoductInfo.productInventory[i].statusId">
+                  <option [ngValue]="undefined">- Select Inventory Status -</option>
+                  <option *ngFor="let obj of types.productInventoryStatusList" [ngValue]="obj.productInventoryStatusId">
+                    {{obj.name}}</option>
+                </select>
+                <small *ngIf="submitted && inv?.controls?.statusId?.invalid"
+                  class="form-text custom-invalid-feedback">
+                  {{'productPage.invStatus' | translate}}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="tittle">{{'productPage.additionalInfo.title' | translate}}</div>
+        <div class="box-container">
+          <div class="clearfix">
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.additionalInfo.tags' | translate}} </label>
+                <mat-select [ngClass]="'form-control'" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="getSelectedTags($event)" placeholder="Select Tag" multiple
+                  [(ngModel)]="productTagSelected">
+                  <mat-option [value]="0">- Select Tag -</mat-option>
+                  <mat-option *ngFor="let obj of types.tagList" [value]="obj.tagId">{{obj.name}}</mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.additionalInfo.manufacturer' | translate}} <span class="star">*</span></label>
+                <select class="form-control" required formControlName="manufacturerId"
+                  [(ngModel)]="prdoductInfo.manufacturerId">
+                  <option [ngValue]="undefined">- Select Manufacturer -</option>
+                  <option *ngFor="let obj of types.manufacturerList" [ngValue]="obj.manufacturerId">{{obj.name}}
+                  </option>
+                </select>
+                <span class="inputFocus"></span>
+                <small class="errorMs" *ngIf="submitted && !f.manufacturerId.value && f.manufacturerId.errors.required">
+                  {{'productPage.manufacturer' | translate}}</small>
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.additionalInfo.condition' | translate}}<span class="star">*</span></label>
+                <select class="form-control" name="conditionId" formControlName="conditionId" required
+                  [(ngModel)]="prdoductInfo.conditionId">
+                  <option [ngValue]="undefined">- Select Condition -</option>
+                  <option *ngFor="let obj of types.conditionList" [ngValue]="obj.conditionId">{{obj.name}}</option>
+                </select>
+                <span class="inputFocus"></span>
+                <small class="errorMs" *ngIf="submitted && !f.conditionId.value && f.conditionId.errors.required">
+                  {{'productPage.condition' | translate}}
+                 </small>
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.additionalInfo.category' | translate}}<span class="star">*</span></label>
+                <select class="form-control" formControlName="categoryId"
+                  [(ngModel)]="prdoductInfo.categoryId">
+                  <option [ngValue]="undefined">- Select Category -</option>
+                  <option *ngFor="let obj of types.productCategoryList" [ngValue]="obj.productCategoryId">{{obj.name}}
+                  </option>
+                </select>
+                <span class="inputFocus"></span>
+                <small class="errorMs" *ngIf="submitted && !f.categoryId.value && f.categoryId.errors.required">
+                  {{'productPage.category' | translate}}</small>
+              </div>
+            </div>
+            <!-- <div class="clearfix"></div> -->
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.additionalInfo.ref1' | translate}}</label>
+                <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                  [(ngModel)]="prdoductInfo.ref1" placeholder="Ref 1">
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.additionalInfo.ref2' | translate}}</label>
+                <input type="text" class="form-control" [ngModelOptions]="{standalone: true}"
+                  [(ngModel)]="prdoductInfo.ref2" placeholder="Ref 2">
+              </div>
+            </div>
+            <div class="cell_2">
+              <div class="form-group">
+                <label class="labletext">{{'productPage.additionalInfo.color' | translate}}<span class="star">*</span></label>
+                <select class="form-control" required formControlName="colorId" [(ngModel)]="prdoductInfo.colorId">
+                  <option [ngValue]="undefined">- Select Color -</option>
+                  <option *ngFor="let obj of types.colorList" [ngValue]="obj.colorId">{{obj.name}}</option>
+                </select>
+                <small class="errorMs" *ngIf="submitted && !f.colorId.value && f.colorId.errors.required">
+                  {{'productPage.color' | translate}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-grp text-right">
+        <button type="submit" (click)="save()" class="allBtn primaryBtn"> {{'productPage.btnSubmit' | translate}}</button>
+        <button class="close-btn" (click)="cancel()"><span class="close_icon"> {{'productPage.btnCancel' | translate}}</span></button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal popupDiv" id="showProduct" style="display: block; padding-left: 17px;" *ngIf="showProduct"
+  role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="float-right">
+        <button type="button" class="close" (click)="closeProduct()">
+          <i class="fa closeIcon"></i>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="fs15 fw500">{{message}}</p>
+        <div class="mt-5 mb-2">
+          <button type="button" class="allBtn primaryBtn" (click)="closeProduct()">
+            <i class="fa check-mark"></i>
+            {{'ok' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal popupDiv" id="showErrorPopup" style="display: block; padding-left: 17px;" *ngIf="showErrorPopup"
+  role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="float-right">
+        <button type="button" class="close" (click)="closeError()">
+          <i class="fa closeIcon"></i>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="fs15 fw500">{{errorMessage}}</p>
+        <div class="mt-5 mb-2">
+          <button type="button" class="allBtn primaryBtn" (click)="closeError()">
+            <i class="fa check-mark"></i>
+            {{'ok' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

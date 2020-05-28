@@ -1,0 +1,29 @@
+<table id="orderLines" class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th>{{'orderLineTable.orderLineId' | translate}}</th>
+      <th>{{'orderLineTable.productId' | translate}}</th>
+      <th>{{'orderLineTable.productName' | translate}}</th>
+      <th>{{'orderLineTable.sku' | translate}}</th>
+      <th>{{'orderLineTable.upc' | translate}}</th>
+      <th>{{'orderLineTable.shipsAlone' | translate}}</th>
+      <th>{{'orderLineTable.unitPrice' | translate}}</th>
+      <th>{{'orderLineTable.quantity' | translate}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let orderLine of orderLines">
+      <td>{{orderLine.orderLineId}}</td>
+      <td>{{orderLine.productID}}</td>
+      <td class="productname">{{orderLine.productName}}</td>
+      <td>{{orderLine.sku}}</td>
+      <td>{{orderLine.upc}}</td>
+      <td><span *ngIf="orderLine.shipsAlone">{{'yes' | translate}}</span><span *ngIf="!orderLine.shipsAlone">{{'no' | translate}}</span></td>
+      <td>{{orderLine.unitPrice}}</td>
+      <td>{{orderLine.quantity}}</td>
+    </tr>
+    <tr *ngIf="orderLines?.length == 0">
+      <td colspan="8" class="no-data-available">{{'noData' | translate}}</td>
+    </tr>
+  </tbody>
+</table>

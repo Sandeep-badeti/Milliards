@@ -1,0 +1,122 @@
+<div class="brDiv">
+  <a [routerLink]="['/orders/list']" [routerLinkActiveOptions]="{exact: false}"
+    [routerLinkActive]="['active']">{{'orders' | translate}}</a> > <span>{{'orderDetails' | translate}}</span>
+</div>
+<div class="mainDiv" *ngIf="orderDetails">
+  <div class="mainDivBg viewDetails">
+    <h4 class="mainHeading mt-3">{{'orderDetailsPage.generalDetails.title' | translate}}<span></span></h4>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.orderId' | translate}}</label>
+          <p>{{orderDetails.orderId}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.orderStatus' | translate}}</label>
+          <p>{{orderDetails.orderStatus}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.ref2' | translate}}</label>
+          <p>{{orderDetails.ref2}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.shipByDate' | translate}}</label>
+          <p>{{orderDetails?.shipByDate | date:'MM/dd/yyyy'}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.amountPaid' | translate}}</label>
+          <p>{{orderDetails.amountPaid}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.billToAddress' | translate}}</label>
+          <p>{{orderDetails.billtoAddress}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.internalNotes' | translate}}</label>
+          <p>{{orderDetails?.internalNotes}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.billToAcctZip' | translate}}</label>
+          <p>{{orderDetails?.billtoAcctZip}}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.channel' | translate}}</label>
+          <p>{{orderDetails?.channel}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.orderNumber' | translate}}</label>
+          <p>{{orderDetails.orderNo}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.ref2' | translate}}</label>
+          <p>{{orderDetails?.ref3}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.reqShipService' | translate}}</label>
+          <p>{{orderDetails.reqShipService}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.shippingPaid' | translate}}</label>
+          <p>{{orderDetails?.shippingPaid}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.shipToAddress' | translate}}</label>
+          <p>{{orderDetails?.shiptoAddress}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.billToCarrier' | translate}}</label>
+          <p>{{orderDetails?.billtoCarrier}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.warehouse' | translate}}</label>
+          <p>{{orderDetails?.warehouse}}</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.orderType' | translate}}</label>
+          <p>{{orderDetails.orderType}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.ref1' | translate}}</label>
+          <p>{{orderDetails?.ref1}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.orderDate' | translate}}</label>
+          <p>{{orderDetails?.orderDate | date:'MM/dd/yyyy'}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.deliverByDate' | translate}}</label>
+          <p>{{orderDetails?.deliverByDate | date:'MM/dd/yyyy'}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.taxPaid' | translate}}</label>
+          <p>{{orderDetails?.taxPaid}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.billToAcctNo' | translate}}</label>
+          <p>{{orderDetails?.billtoAcctNo}}</p>
+        </div>
+        <div class="mb-4 clearfix">
+          <label>{{'orderDetailsPage.generalDetails.customerNotes' | translate}}</label>
+          <p>{{orderDetails?.customerNotes}}</p>
+        </div>
+      </div>
+    </div>
+    <h4 class="mainHeading mt-3">{{'orderDetailsPage.orderLines' | translate}}<span></span></h4>
+    <div class="table-responsive viewTable">
+      <app-order-line-table [orderLinesList]="orderLines"></app-order-line-table>
+    </div>
+    <h4 class="mainHeading mt-4">{{'orderDetailsPage.fulFillmentOrders' | translate}}<span></span></h4>
+    <div class="table-responsive viewTable">
+      <app-full-orders-table [fullOrdersList]="fullfilledOrders">
+      </app-full-orders-table>
+    </div>
+  </div>
+  <div class="float-right mt-4 mb-4">
+    <button class="close-btn" (click)="closeOrderDetails()"><span class="close_icon"> {{'btnClose' | translate}}</span></button>
+  </div>
+</div>

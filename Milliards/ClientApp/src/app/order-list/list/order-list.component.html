@@ -1,0 +1,129 @@
+<!-- <div class="brDiv">
+  <a [routerLink]="['/orders/list']" [routerLinkActiveOptions]="{exact: true}"
+    routerLinkActive="active">{{'orderListPage.title' | translate}}</a>
+</div> -->
+<div class="mainDiv">
+  <h3 class="mainHeading">{{'orderListPage.title' | translate}} : <span>{{'totalRecs' | translate}}
+    {{totalRecords}}</span></h3>
+  <div class="row">
+    <div class="col-10">
+      <div class="searchDiv mt-2 mb-4">
+        <img src="../assets/images/searchIcon.png" width="18" height="19" alt="" />
+        <input class="searchBox" type="text" (keydown)="globalSearchOrders()" [(ngModel)]="searchText"
+          placeholder="Search By: Order ID / /Channel/ SKU / Quantity / Order Type / Order Number / Order Date / Ship By Date / Deliver By Date / Order Status">
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="filterDiv mt-2 w-75">
+        <a (click)="toggleSearch()" class="filterShowHide">Filter <img src="{{imageUrl}}" width="9" height="7"
+            alt="" /></a>
+      </div>
+    </div>
+  </div>
+  <div class="filterShowDiv w-75 mb-4" *ngIf="showSearch">
+    <div class="row">
+      <div class="col-sm-5">
+        <label>{{'orderListPage.fromDate' | translate}}</label>
+        <div class="inpudtDiv fs14 p-2 mb-0">
+          <mat-form-field class="dateField">
+            <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" [(ngModel)]="fromDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div class="lookupIcon"><img alt="calendar" src="assets/images/calendar.png"></div>
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <label>{{'orderListPage.toDate' | translate}}</label>
+        <div class="inpudtDiv fs14 p-2 mb-0">
+          <mat-form-field class="dateField">
+            <input matInput [matDatepicker]="picker1" placeholder="MM/DD/YYYY" [(ngModel)]="toDate">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          <div class="lookupIcon"><img alt="calendar" src="assets/images/calendar.png"></div>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <button class="searchBtnSec" (click)="searchOrdersByDate()">{{'orderListPage.search' | translate}}</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive tableList">
+    <table datatable [dtOptions]="dtOptions" class="table table-striped table-sm" id="orderId">
+      <thead>
+        <tr>
+          <th class="nosorting"></th>
+          <th>{{'orderListPage.table.orderId' | translate}}</th>
+          <th>{{'orderListPage.table.channel' | translate}}</th>
+          <th>{{'orderListPage.table.sku' | translate}}</th>
+          <th>{{'orderListPage.table.quantity' | translate}}</th>
+          <th>{{'orderListPage.table.orderType' | translate}}</th>
+          <th>{{'orderListPage.table.orderNumber' | translate}}</th>
+          <th>{{'orderListPage.table.orderDate' | translate}}</th>
+          <th>{{'orderListPage.table.shipByDate' | translate}}</th>
+          <th>{{'orderListPage.table.deliverByDate' | translate}}</th>
+          <th>{{'orderListPage.table.orderStaus' | translate}}</th>
+          <th class="nosorting">{{'orderListPage.table.action' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="orderList?.length != 0">
+        <ng-container *ngFor="let list of orderList;let i = index">
+          <tr [ngClass]="{'info_alrt': !(list.isFulfilled)}">
+            <td (click)="showMore(list,i)" appTableCellToggle></td>
+            <td>{{list.orderId}}</td>
+            <td>{{list.channel}}</td>
+            <td>{{list.sku}}</td>
+            <td>{{list.quantity}}</td>
+            <td>{{list.orderType}}</td>
+            <td>{{list.orderNumber}}</td>
+            <td>{{list.orderDate | date:'MM/dd/yyyy'}}</td>
+            <td>{{list.shipByDate | date:'MM/dd/yyyy'}}</td>
+            <td>{{list.deliverByDate | date:'MM/dd/yyyy'}}</td>
+            <td>{{list.orderStatus}}</td>
+            <td>
+              <div class="actionDiv"><a
+                  (click)="orderDetails(list, i)">{{'orderListPage.table.orderDetails' | translate}}</a></div>
+            </td>
+          </tr>
+          <tr *ngIf="list?.showMore">
+            <td colspan="12">
+              <div class="row pl-3 mb-4">
+                <div class="col-md-2">
+                  <label class="switch">
+                    <input type="radio" name="orders{{i}}" value="orderLines"
+                      (click)="selectType('orderLines', list, i)" [checked]='true'>
+                    <span class="slider round"></span>
+                    <b>{{'orderListPage.orderLines' | translate}}</b>
+                  </label>
+
+                </div>
+                <div class="col-md-3" *ngIf="orderList[i]?.isFulfilled">
+                  <label class="switch">
+                    <input type="radio" name="orders{{i}}" value="fullOrders"
+                      (click)="selectType('fullOrders', list, i)">
+                    <span class="slider round"></span>
+                    <b style="vertical-align:middle">{{'orderListPage.fulfillmentOrders' | translate}}</b>
+                  </label>
+                </div>
+              </div>
+              <div class="innerTable" *ngIf="isSelected('orderLines', i)">
+                <app-order-line-table [orderLinesList]="orderLines[i]"></app-order-line-table>
+              </div>
+              <div class="innerTable" *ngIf="isSelected('fullOrders', i)">
+                <app-full-orders-table [fullOrdersList]="fullfilledOrders[i]">
+                </app-full-orders-table>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+      <tbody *ngIf="orderList?.length == 0">
+        <tr>
+          <td colspan="12" class="no-data-available">{{'noData' | translate}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

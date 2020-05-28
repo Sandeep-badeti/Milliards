@@ -1,0 +1,31 @@
+<table id="fullorders" class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th>{{'fullOrderTable.fullOrderId' | translate }}</th>
+      <th>{{'fullOrderTable.status' | translate }}</th>
+      <th>{{'fullOrderTable.assignedWarehouseId' | translate }}</th>
+      <th>{{'fullOrderTable.assignedCarrierID' | translate }}</th>
+      <th>{{'fullOrderTable.carrierUpdatedDate' | translate }}</th>
+      <th>{{'fullOrderTable.boxId' | translate }}</th>
+      <th>{{'fullOrderTable.noOfFulItems' | translate }}</th>
+      <!-- <th>{{'fullOrderTable.action' | translate }}</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let fullOrder of fullfilledOrders;">
+      <tr>
+        <td>{{fullOrder.fulOrderId}}</td>
+        <td>{{fullOrder.status}}</td>
+        <td>{{fullOrder.assignedWarehouseId}}</td>
+        <td>{{fullOrder.assignedCarrierId}}</td>
+        <td>{{fullOrder.carrierUpdateDate | date:'MM/dd/yyyy'}}</td>
+        <td>{{fullOrder.boxId }}</td>
+        <td>{{fullOrder.noofFulfillmentItems}}</td>
+        <!-- <td><a>{{'fullOrderTable.view' | translate}}</a></td> -->
+      </tr>
+    </ng-container>
+    <tr *ngIf="fullfilledOrders?.length == 0">
+      <td colspan="7" class="no-data-available">{{'noData' | translate}}</td>
+    </tr>
+  </tbody>
+</table>

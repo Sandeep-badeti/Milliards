@@ -1,0 +1,105 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <IsPackable>false</IsPackable>
+    <SpaRoot>ClientApp\</SpaRoot>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
+
+    <!-- Set this to true if you enable server-side prerendering -->
+    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\**" />
+    <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\**" />
+    <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\app\**" />
+    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\src\app\order-list\directives\table-cell-toggle.directive.spec.ts" />
+    <None Remove="ClientApp\src\app\order-list\directives\table-cell-toggle.directive.ts" />
+    <None Remove="ClientApp\src\app\order-list\full-orders-table\full-orders-table.component.css" />
+    <None Remove="ClientApp\src\app\order-list\full-orders-table\full-orders-table.component.html" />
+    <None Remove="ClientApp\src\app\order-list\full-orders-table\full-orders-table.component.spec.ts" />
+    <None Remove="ClientApp\src\app\order-list\full-orders-table\full-orders-table.component.ts" />
+    <None Remove="ClientApp\src\app\order-list\list\order-list.component.css" />
+    <None Remove="ClientApp\src\app\order-list\list\order-list.component.html" />
+    <None Remove="ClientApp\src\app\order-list\list\order-list.component.spec.ts" />
+    <None Remove="ClientApp\src\app\order-list\list\order-list.component.ts" />
+    <None Remove="ClientApp\src\app\order-list\list\order-list.service.spec.ts" />
+    <None Remove="ClientApp\src\app\order-list\list\order-list.service.ts" />
+    <None Remove="ClientApp\src\app\order-list\models\FullOrderList.ts" />
+    <None Remove="ClientApp\src\app\order-list\models\OrderDetails.ts" />
+    <None Remove="ClientApp\src\app\order-list\models\OrderLinesList.ts" />
+    <None Remove="ClientApp\src\app\order-list\models\OrderList.ts" />
+    <None Remove="ClientApp\src\app\order-list\order-details\order-details.component.css" />
+    <None Remove="ClientApp\src\app\order-list\order-details\order-details.component.html" />
+    <None Remove="ClientApp\src\app\order-list\order-details\order-details.component.spec.ts" />
+    <None Remove="ClientApp\src\app\order-list\order-details\order-details.component.ts" />
+    <None Remove="ClientApp\src\app\order-list\order-details\order-details.service.spec.ts" />
+    <None Remove="ClientApp\src\app\order-list\order-details\order-details.service.ts" />
+    <None Remove="ClientApp\src\app\order-list\order-line-table\order-line-table.component.css" />
+    <None Remove="ClientApp\src\app\order-list\order-line-table\order-line-table.component.html" />
+    <None Remove="ClientApp\src\app\order-list\order-line-table\order-line-table.component.spec.ts" />
+    <None Remove="ClientApp\src\app\order-list\order-line-table\order-line-table.component.ts" />
+    <None Remove="ClientApp\src\app\order-list\order-main.component.css" />
+    <None Remove="ClientApp\src\app\order-list\order-main.component.html" />
+    <None Remove="ClientApp\src\app\order-list\order-main.component.spec.ts" />
+    <None Remove="ClientApp\src\app\order-list\order-main.component.ts" />
+    <None Remove="ClientApp\src\app\order-list\order.module.ts" />
+    <None Remove="ClientApp\src\app\side-nav-menu\side-nav-menu.component.css" />
+    <None Remove="ClientApp\src\app\side-nav-menu\side-nav-menu.component.html" />
+    <None Remove="ClientApp\src\app\side-nav-menu\side-nav-menu.component.spec.ts" />
+    <None Remove="ClientApp\src\app\side-nav-menu\side-nav-menu.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="5.6.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.5.0" />
+    <PackageReference Include="NLog" Version="4.6.8" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.6.2" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.2" />
+  </ItemGroup>
+
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+    <!-- Ensure Node.js is installed -->
+    <Exec Command="node --version" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+    </Exec>
+    <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
+    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+  </Target>
+
+  <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
+    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="ng build --prod" />
+    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+
+    <!-- Include the newly-built files in the publish output -->
+    <ItemGroup>
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
+      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+        <RelativePath>%(DistFiles.Identity)</RelativePath>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      </ResolvedFileToPublish>
+    </ItemGroup>
+  </Target>
+
+</Project>
