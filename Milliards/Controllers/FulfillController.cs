@@ -57,6 +57,14 @@ namespace Milliards.Controllers
             return Ok(result);
         }
         [HttpPost]
+        [ActionName("edit")]
+        public ActionResult<Object> EditFulorder(FulfillOrderViewDTO FulOrder)
+        {
+            var result = fulfillService.EditFulorder(FulOrder);
+            return Ok(result);
+        }
+
+        [HttpPost]
         [ActionName("CreatePickListBatch")]
         public ActionResult<Object> CreatePickListBatch(List<int> fulOrderList)
         {

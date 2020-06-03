@@ -54,6 +54,8 @@ namespace Milliards.Services
                 var manufacturerList = context.Manufacturer.Select(x => new { x.ManufacturerId, x.Name }).ToList();
                 var conditionList = context.Condition.Select(x => new { x.ConditionId, x.Name }).ToList();
                 var colorList = context.Color.Select(x => new { x.ColorId, x.Name }).ToList();
+                var errorReasonList = context.ErrorReason.Select(x => new { x.ErrorReasonId, x.Name }).ToList();
+                var OnHoldReasonList = context.OnHoldReason.Select(x => new { x.OnHoldReasonId, x.Name }).ToList();
                 var productTagList = context.ProductTag.Select(x => new { x.ProductId, x.TagId }).ToList();
                 var productCategoryList = context.ProductCategory.Select(x => new { x.ProductCategoryId, x.Name }).ToList();
                 var tagList = context.Tag.Select(x => new { x.TagId, x.Name, x.TagTypeId }).ToList();
@@ -77,7 +79,9 @@ namespace Milliards.Services
                     productCategoryList,
                     tagList,
                     modeList,
-                    carrierList
+                    carrierList,
+                    errorReasonList,
+                    OnHoldReasonList
                 };
             }
             catch (Exception ex)

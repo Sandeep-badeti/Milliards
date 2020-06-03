@@ -168,6 +168,43 @@ namespace Milliards.Services
             return FulOrderObj;
         }
 
+        public Object EditFulorder(FulfillOrderViewDTO FulOrder)
+        {
+            try
+            {
+                bool isSuccess=false;
+                string result = string.Empty;
+                int fulOrderId = FulOrder.fulOrderId;
+                FulOrder FulOrderObj = (from fo in context.FulOrder
+                                        where fo.FulOrderId == fulOrderId
+                                        select fo).FirstOrDefault();
+                if (FulOrderObj != null)
+                {
+                    FulOrderObj.Error_FLG = FulOrder.errorFlag == "No" ? false : true;
+                    FulOrderObj.OnHold_FLG = FulOrder.onHoldFlag == "No" ? false : true;
+                    FulOrderObj.OnHoldReasonId = Convert.ToInt32(FulOrder.onHoldReason); 
+                    FulOrderObj.ErrorReasonId = Convert.ToInt32(FulOrder.errorReason);
+                    context.FulOrder.Update(FulOrderObj);
+                    context.SaveChanges();
+                    result = _iconfiguration["FULORDER_EDITED_SUCCESSFUL"];
+                    isSuccess = true;
+                }
+                return new { status = isSuccess, fulOrderID = FulOrder.fulOrderId, message = result };
+            }
+            catch (Exception ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    return new { status = false, fulOrderID = FulOrder.fulOrderId, message = ex.InnerException.Message };
+                }
+                else
+                {
+                    return new { status = false, fulOrderID = FulOrder.fulOrderId, message = ex.Message };
+                }
+                throw ex;
+            }
+        }
+
         public object CreatePickListBatch(List<int> fulOrderList)
         {
             try

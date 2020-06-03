@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Milliards.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Milliards.Services
         public object AssignWarehouseCarrier(int FulOrderId, int WarehouseId, int CarrierId, int CarrierServiceId);
         public object GetfullFilList(int pageno, int recordsize, string columnsort, string ordersort, string searchValue, string mode, int warehouseId);
         public object GetFullOrder(int FulOrderId);
+        public Object EditFulorder(FulfillOrderViewDTO FulOrder);
         public object CreatePickListBatch(List<int> fulOrderList);
         public object GenerateLabel(string UPC);
         public object CreatePackage(int fulOrderId);
